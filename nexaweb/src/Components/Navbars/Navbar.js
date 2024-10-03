@@ -12,7 +12,7 @@ import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import ButtonUsage from "../Button/ButtonUsage";
+import { Link } from "react-scroll"; // For smooth scrolling
 
 export default function Navbar() {
   const theme = useTheme();
@@ -29,13 +29,13 @@ export default function Navbar() {
 
   const drawerList = (
     <Box
-      sx={{ width: 250 }}
+      sx={{ width: 250, backgroundColor: '#333', height: '100vh', color: 'white' }}
       role="presentation"
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        {['Home', 'About', 'Services', 'Contact'].map((text) => (
+        {['Home', 'About', 'Services', 'Portfolio', 'Contact'].map((text) => (
           <ListItem button key={text}>
             <ListItemText primary={text} />
           </ListItem>
@@ -62,7 +62,7 @@ export default function Navbar() {
                 size="large"
                 edge="start"
                 color="inherit"
-                aria-label="menu"
+                aria-label="open drawer"
                 sx={{ mr: 2 }}
                 onClick={toggleDrawer(true)}
               >
@@ -70,17 +70,29 @@ export default function Navbar() {
               </IconButton>
             )}
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              <img src="Images/logo.png" height={80} width={80} alt="Logo" />
+              <img src="/Images/logo.png" height={80} width={80} alt="Logo" />
             </Typography>
             {!isMobile && (
               <>
-                <Button className="animated-text" href="#home" color="inherit">Home</Button>
-                <Button className="animated-text" href="#about" color="inherit">About</Button>
-                <Button className="animated-text" href="#services" color="inherit">Services</Button>
-                <Button className="animated-text" href="#contact" color="inherit">Contact</Button>
+                <Button className="animated-text" color="inherit">
+                  <Link to="home" smooth={true} duration={500}>Home</Link>
+                </Button>
+                <Button className="animated-text" color="inherit">
+                  <Link to="about" smooth={true} duration={500}>About</Link>
+                </Button>
+                <Button className="animated-text" color="inherit">
+                  <Link to="services" smooth={true} duration={500}>Services</Link>
+                </Button>
+                {/* <Button className="animated-text" color="inherit">
+                  <Link to="/portfolio" smooth={true} duration={500}>Portfolio</Link>
+                </Button> */}
+                <Button className="animated-text" href="/portfolio" color="inherit">Portfolio</Button>
+
+                <Button className="animated-text" color="inherit">
+                  <Link to="contact" smooth={true} duration={500}>Contact</Link>
+                </Button>
               </>
             )}
-            {/* <ButtonUsage></ButtonUsage> */}
           </Toolbar>
         </AppBar>
         <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>

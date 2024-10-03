@@ -1,0 +1,9 @@
+.social-icon {
+    transition: transform 0.5s ease, color 0.5s ease;
+  }
+  
+  .social-icon:hover {
+    transform: scale(1.5);
+    color: #ff7e5f; /* Optional: Change icon color on hover */
+  }
+  

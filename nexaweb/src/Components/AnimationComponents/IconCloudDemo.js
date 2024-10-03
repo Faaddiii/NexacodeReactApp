@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import IconCloud from "./IconCloud"; 
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJs } from "react-icons/fa";
 
 const slugs = [
     "csharp", "python", "angular", "dotnet", "microsoft", "apple", "amazon", "linux",

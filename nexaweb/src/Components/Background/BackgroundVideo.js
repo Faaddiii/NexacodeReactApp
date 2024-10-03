@@ -10,7 +10,7 @@ const BackgroundVideo = () => {
     top: 0,
     left: 0,
     width: "100%",
-    height: "100%",
+    height: "100vh",
     objectFit: "cover", // Ensures the video covers the entire area
     zIndex: -1, // Keep it behind other content
   };
