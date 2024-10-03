@@ -12,7 +12,7 @@ import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import ButtonUsage from "../Button/ButtonUsage";
+import { Link } from "react-scroll"; // For smooth scrolling
 
 export default function Navbar() {
   const theme = useTheme();
@@ -29,13 +29,13 @@ export default function Navbar() {
 
   const drawerList = (
     <Box
-      sx={{ width: 250 }}
+      sx={{ width: 250, backgroundColor: '#333', height: '100vh', color: 'white' }}
       role="presentation"
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        {['Home', 'About', 'Services', 'Contact'].map((text) => (
+        {['Home', 'About', 'Services', 'Portfolio', 'Contact'].map((text) => (
           <ListItem button key={text}>
             <ListItemText primary={text} />
           </ListItem>
@@ -45,45 +45,60 @@ export default function Navbar() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar 
-        position="static"
-        sx={{
-          backgroundColor: 'transparent',  // Transparent background
-          boxShadow: 'none',               // Remove the shadow
-          backdropFilter: 'blur(10px)',    // Optional: adds a blur effect for a glassy look
-        }}
-      >
-        <Toolbar>
-          {isMobile && (
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-              onClick={toggleDrawer(true)}
-            >
-              <MenuIcon />
-            </IconButton>
-          )}
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Nexacode App
-          </Typography>
-          {!isMobile && (
-            <>
-              <Button color="inherit">Home</Button>
-              <Button color="inherit">About</Button>
-              <Button color="inherit">Services</Button>
-              <Button color="inherit">Contact</Button>
-            </>
-          )}
-          <ButtonUsage></ButtonUsage>
-        </Toolbar>
-      </AppBar>
-      <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
-        {drawerList}
-      </Drawer>
-    </Box>
+    <div id="home">
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar
+          position="fixed"  // Change to fixed for sticky navbar
+          sx={{
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',  // Optional: Adds a background color
+            boxShadow: 'none',
+            backdropFilter: 'blur(10px)',
+            zIndex: 1000,  // Ensure it stays on top of other content
+          }}
+        >
+          <Toolbar>
+            {isMobile && (
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="open drawer"
+                sx={{ mr: 2 }}
+                onClick={toggleDrawer(true)}
+              >
+                <MenuIcon />
+              </IconButton>
+            )}
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              <img src="/Images/logo.png" height={80} width={80} alt="Logo" />
+            </Typography>
+            {!isMobile && (
+              <>
+                <Button className="animated-text" color="inherit">
+                  <Link to="home" smooth={true} duration={500}>Home</Link>
+                </Button>
+                <Button className="animated-text" color="inherit">
+                  <Link to="about" smooth={true} duration={500}>About</Link>
+                </Button>
+                <Button className="animated-text" color="inherit">
+                  <Link to="services" smooth={true} duration={500}>Services</Link>
+                </Button>
+                {/* <Button className="animated-text" color="inherit">
+                  <Link to="/portfolio" smooth={true} duration={500}>Portfolio</Link>
+                </Button> */}
+                <Button className="animated-text" href="/portfolio" color="inherit">Portfolio</Button>
+
+                <Button className="animated-text" color="inherit">
+                  <Link to="contact" smooth={true} duration={500}>Contact</Link>
+                </Button>
+              </>
+            )}
+          </Toolbar>
+        </AppBar>
+        <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
+          {drawerList}
+        </Drawer>
+      </Box>
+    </div>
   );
 }
